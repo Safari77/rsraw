@@ -39,19 +39,19 @@ jobs:
               cross: false,
               command: 'test'
             }
-          # - {
-          #     target: aarch64-apple-ios,
-          #     os: macos-latest,
-          #     toolchain: 'nightly-2025-01-01',
-          #     cross: false,
-          #     command: 'build'
-          #   }
+          - {
+              target: aarch64-apple-ios,
+              os: macos-latest,
+              toolchain: 'nightly-2025-01-01',
+              cross: false,
+              command: 'test'
+            }
           - {
               target: aarch64-linux-android,
               os: ubuntu-latest,
               toolchain: 'nightly-2025-01-01',
               cross: true,
-              command: 'build'
+              command: 'test'
             }
     
     steps:
@@ -71,7 +71,7 @@ jobs:
           rustup default ${{ matrix.platform.toolchain }}-${{ matrix.platform.target }}
           rustup toolchain uninstall ${{ matrix.platform.toolchain }}-x86_64-pc-windows-msvc
           rustup target uninstall x86_64-pc-windows-msvc
-          rm rust-toolchain.toml
+          # rm rust-toolchain.toml
       - name: install Linux dependencies
         if: contains(matrix.platform.target, 'unknown-linux')
         run: |
