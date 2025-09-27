@@ -8,7 +8,7 @@ license = "MIT"
 repository = "https://github.com/hexilee/rsraw"
 homepage = "https://github.com/hexilee/rsraw"
 documentation = "https://docs.rs/rsraw"
-keywords = ["raw", "image", "processing", "libraw", "camera", "photography", "demosaic", "exif"]
+keywords = ["raw", "image", "processing", "libraw", "exif"]
 categories = ["multimedia::images", "filesystem", "parsing"]
 readme = "../README.md"
 
