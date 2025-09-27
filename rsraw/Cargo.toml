@@ -11,9 +11,7 @@ documentation = "https://docs.rs/rsraw"
 keywords = ["raw", "image", "processing", "libraw", "exif"]
 categories = ["multimedia::images", "filesystem", "parsing"]
 readme = "../README.md"
-
-[exclude]
-"tests/assets/"
+exclude = ["tests/assets"]
 
 [dependencies]
 rsraw-sys = { path = "../rsraw-sys", version = "0.1" }
