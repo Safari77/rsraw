@@ -102,7 +102,11 @@ fn build(out_dir: impl AsRef<Path>) {
 
     // thread safety
     libraw.flag("-pthread");
-    libraw.static_flag(true);
+    // Tell LibRaw we are building a static lib
+    // prevents error LibRaw/src/libraw_c_api.cpp(307): error C2491: 'libraw_set_demosaic': definition of dllimport function not allowed
+    if std::env::var("CARGO_CFG_TARGET_OS").unwrap() == "windows" {
+        libraw.define("LIBRAW_NODLL", None);
+    }
     libraw.compile("raw");
 
     println!(
