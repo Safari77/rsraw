@@ -9,9 +9,6 @@ fn main() {
 fn build(out_dir: impl AsRef<Path>) {
     let mut libraw = cc::Build::new();
     let compiler = libraw.get_compiler();
-    if compiler.is_like_msvc() {
-        panic!("MSVC is not supported");
-    }
 
     libraw.cpp(true);
     libraw.include("LibRaw/");
