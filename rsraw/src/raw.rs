@@ -60,6 +60,19 @@ impl RawImage {
         Ok(thumbs.into_inner())
     }
 
+    /// Enables or disables the ultra-fast pixel binning output.
+    /// Must be called before `unpack()`.
+    pub fn set_half_size(&mut self, enable: bool) {
+        // Because we are touching a C-struct, Rust requires an unsafe block.
+        // We are telling the compiler "I know what I'm doing with this pointer."
+        unsafe {
+            // Find what the underlying C pointer is named in their struct.
+            // It might be `self.inner`, `self.libraw_data`, or `self.ptr`.
+            // We access the `params` struct and flip the `half_size` integer.
+            (*self.raw_data).params.half_size = if enable { 1 } else { 0 };
+        }
+    }
+
     pub fn width(&self) -> u32 {
         self.as_ref().sizes.width as _
     }
@@ -283,7 +296,10 @@ mod tests {
                     aperture: 3.5,
                     focal_len: 105.,
                     datetime: Local.with_ymd_and_hms(2024, 11, 4, 20, 11, 38).single(),
-                    gps: Default::default(),
+                    // Z8 NEF has GPS EXIF tags present but coordinates are
+                    // zeroed (no fix). LibRaw still sets gpsparsed = 1, but
+                    // since all coords are zero the result equals default.
+                    gps: GpsInfo::default(),
                     artist: "HEXILEE".into(),
                     desc: "".into(),
                     make: "Nikon".into(),
