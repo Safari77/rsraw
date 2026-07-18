@@ -26,6 +26,7 @@ fn build(out_dir: impl AsRef<Path>) {
     libraw.file("LibRaw/src/decoders/load_mfbacks.cpp");
     libraw.file("LibRaw/src/decoders/pana8.cpp");
     libraw.file("LibRaw/src/decoders/olympus14.cpp");
+    libraw.file("LibRaw/src/decoders/sony_arw6.cpp");
     libraw.file("LibRaw/src/decoders/sonycc.cpp");
     libraw.file("LibRaw/src/decoders/smal.cpp");
     libraw.file("LibRaw/src/decoders/unpack.cpp");
