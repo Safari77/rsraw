@@ -25,7 +25,9 @@ unsafe impl Send for ProcessedImage<BIT_DEPTH_16> {}
 
 impl<const D: BitDepth> ProcessedImage<D> {
     pub(crate) unsafe fn from_raw(ptr: *mut sys::libraw_processed_image_t) -> Self {
-        debug_assert!(!ptr.is_null());
+        if ptr.is_null() {
+            panic!("libraw_processed_image_t pointer is null");
+        }
         Self { inner: ptr }
     }
 
