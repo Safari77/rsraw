@@ -18,7 +18,7 @@ pub struct Thumbnails {
     thumbs: Vec<ThumbnailImage>,
 }
 
-#[derive(Hash)]
+#[derive(Clone, PartialEq, Eq, Hash)]
 pub struct ThumbnailImage {
     pub format: ThumbFormat,
     pub width: u32,
