@@ -53,7 +53,7 @@ impl From<sys::LibRaw_errors> for Error {
             sys::LibRaw_errors_LIBRAW_BAD_CROP => Error::BadCrop,
             sys::LibRaw_errors_LIBRAW_TOO_BIG => Error::TooBig,
             sys::LibRaw_errors_LIBRAW_MEMPOOL_OVERFLOW => Error::MempoolOverflow,
-            _ => Error::Unknown(code),
+            _ => Error::Unknown(code as i32),
         }
     }
 }
